@@ -1,0 +1,36 @@
+groups:
+- name: admin.rule
+  rules:
+  - alert: container_cpu_usage_seconds_total_gt_1000_ace7b901b4fcff6d13624810090d4dfe
+    expr: (ceil(sum(rate(container_cpu_usage_seconds_total{namespace="admin",pod_name=~"^fffff-[0-9]{5,15}-[0-9a-zA-Z]{5}$"}[5m]))
+      * 100 * 100)/100) > 10
+    labels:
+      tenxClusterID: CID-f794208bc85f
+      tenxNamespace: admin
+      tenxStrategyID: STRAID-2CAszUZChNQP
+      tenxStrategyName: yyy
+      tenxTargetName: fffff
+      tenxTargetType: service
+    annotations:
+      condition: CPU利用率 > 10%
+      createTime: 2017-11-28T16:34:20+08:00
+      currentValue: CPU利用率 {{ $value }}%
+      tenxMetricType: cpu/usage_rate
+      tokenMD5: 9f834d0df08163e97b1ebb8423003292
+  - alert: container_cpu_usage_seconds_total_gt_9000_788a0a004db0bdc447d8f0ed31125bb7
+    expr: (ceil(sum(rate(container_cpu_usage_seconds_total{namespace="admin",pod_name=~"^fffff-[0-9]{5,15}-[0-9a-zA-Z]{5}$"}[5m]))
+      * 100 * 100)/100) > 90
+    labels:
+      tenxClusterID: CID-f794208bc85f
+      tenxNamespace: admin
+      tenxStrategyID: STRAID-ZMY7tmEBQ76S
+      tenxStrategyName: yyyx
+      tenxTargetName: fffff
+      tenxTargetType: service
+    annotations:
+      condition: CPU利用率 > 90%
+      createTime: 2017-11-28T16:33:52+08:00
+      currentValue: CPU利用率 {{ $value }}%
+      tenxMetricType: cpu/usage_rate
+      tokenMD5: 9f834d0df08163e97b1ebb8423003292
+
