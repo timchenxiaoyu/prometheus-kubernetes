@@ -1,6 +1,10 @@
 global:
   scrape_interval: 1m
+<<<<<<< HEAD
   scrape_timeout: 10s
+=======
+  scrape_timeout: 101s
+>>>>>>> test
   evaluation_interval: 1m
 alerting:
   alertmanagers:
