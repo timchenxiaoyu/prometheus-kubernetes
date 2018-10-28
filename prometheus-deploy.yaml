@@ -36,7 +36,7 @@ spec:
         - --web.enable-lifecycle
         command:
         - /bin/prometheus
-        image: harbor.enncloud.cn/enncloud/prometheus:2.0
+        image: registry.cn-hangzhou.aliyuncs.com/choerodon-tools/prometheus:v2.2.1
         imagePullPolicy: Always
         name: prometheus
         ports:
@@ -56,18 +56,6 @@ spec:
           name: data
         - mountPath: /etc/prometheus
           name: config-volume
-        - mountPath: /etc/prometheus_rules
-          name: rules-volume
-      - args:
-        - 'while inotifywait -qq -e modify,create,delete /etc/prometheus_rules/..data/;
-          do sh -c  "curl -X POST http://localhost:9090/-/reload"; done; '
-        image: harbor.enncloud.cn/tenx_containers/inotify:1.0
-        imagePullPolicy: Always
-        name: notify
-        resources: {}
-        terminationMessagePath: /dev/termination-log
-        terminationMessagePolicy: File
-        volumeMounts:
         - mountPath: /etc/prometheus_rules
           name: rules-volume
       dnsPolicy: ClusterFirst
